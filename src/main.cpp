@@ -4,13 +4,20 @@
 #include <LiquidMenu.h>
 
 #include "LedTube.h"
+#include "State.h"
 
-// input buttons
+// input buttons config
 #define BUTTON_UP 26
 #define BUTTON_RIGHT 25
 #define BUTTON_DOWN 32
 #define BUTTON_LEFT 33
 String currentNavigation = "none";
+
+// led tube config
+#define TUBE_COUNT 6
+#define PIXELS_PER_TUBE 60
+
+State *currentState;
 
 // blank function to attach to menu lines so they become focusable
 void noop()
@@ -78,9 +85,19 @@ void setup()
   attachInterrupt(BUTTON_DOWN, downPressed, FALLING);
   attachInterrupt(BUTTON_LEFT, leftPressed, FALLING);
 
-  // setup led tubes
-  LedTube tube1(60);
-  Serial.println(tube1.getPixelCount());
+  // set up led tubes
+  std::vector<LedTube> ledTubes;
+  for (int i = 0; i < TUBE_COUNT; i++)
+  {
+    LedTube tube(PIXELS_PER_TUBE);
+    ledTubes.push_back(tube);
+  }
+
+  // set up states
+  StaticState staticState(&ledTubes);
+  AutoState autoState(&ledTubes);
+  SoundState soundState(&ledTubes);
+  currentState = &staticState;
 }
 
 void loop()
