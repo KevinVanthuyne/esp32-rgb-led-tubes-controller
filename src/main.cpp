@@ -3,6 +3,8 @@
 #include <LiquidCrystal_I2C.h>
 #include <LiquidMenu.h>
 
+#include "LedTube.h"
+
 // input buttons
 #define BUTTON_UP 26
 #define BUTTON_RIGHT 25
@@ -75,6 +77,10 @@ void setup()
   attachInterrupt(BUTTON_RIGHT, rightPressed, FALLING);
   attachInterrupt(BUTTON_DOWN, downPressed, FALLING);
   attachInterrupt(BUTTON_LEFT, leftPressed, FALLING);
+
+  // setup led tubes
+  LedTube tube1(60);
+  Serial.println(tube1.getPixelCount());
 }
 
 void loop()
