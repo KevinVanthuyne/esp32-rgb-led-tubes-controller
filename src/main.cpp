@@ -1,11 +1,4 @@
-#include <Arduino.h>
-
-#include <LiquidCrystal_I2C.h>
-#include <LiquidMenu.h>
-
 #include "main.h"
-#include "LedTube.h"
-#include "State.h"
 
 // input buttons config
 #define BUTTON_UP 26
@@ -17,7 +10,7 @@
 #define TUBE_COUNT 6
 #define PIXELS_PER_TUBE 60
 
-State *currentState;
+Mode *currentMode;
 Navigation currentNavigation = NONE;
 
 // blank function to attach to menu lines so they become focusable
@@ -93,18 +86,17 @@ void setup()
     ledTubes.push_back(tube);
   }
 
-  // set up states
-  StaticState staticState(&ledTubes);
-  AutoState autoState(&ledTubes);
-  SoundState soundState(&ledTubes);
-  currentState = &staticState;
+  // set up Modes
+  StaticMode staticMode(&ledTubes);
+  AutoMode autoMode(&ledTubes);
+  SoundMode soundMode(&ledTubes);
+  currentMode = &staticMode;
 }
 
 void loop()
 {
   handleNavigation();
-
-  // run one iteration of the current mode
+  //currentMode->runIteration();
 }
 
 void handleNavigation()
