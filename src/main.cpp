@@ -3,6 +3,7 @@
 #include <LiquidCrystal_I2C.h>
 #include <LiquidMenu.h>
 
+#include "main.h"
 #include "LedTube.h"
 #include "State.h"
 
@@ -11,13 +12,13 @@
 #define BUTTON_RIGHT 25
 #define BUTTON_DOWN 32
 #define BUTTON_LEFT 33
-String currentNavigation = "none";
 
 // led tube config
 #define TUBE_COUNT 6
 #define PIXELS_PER_TUBE 60
 
 State *currentState;
+Navigation currentNavigation = NONE;
 
 // blank function to attach to menu lines so they become focusable
 void noop()
@@ -35,31 +36,30 @@ LiquidScreen modesScreen(modesLine, staticLine, autoLine, soundLine);
 
 LiquidMenu menu(lcd); // make sure to uncomment the LiquidCrystel_I2C part in the LiquidMenu_config.h
 
+// interrupt handlers for navigation
 void IRAM_ATTR upPressed()
 {
-  Serial.println("up");
-  currentNavigation = "up";
+  currentNavigation = UP;
 }
 
 void IRAM_ATTR rightPressed()
 {
-  Serial.println("right");
+  currentNavigation = RIGHT;
 }
 
 void IRAM_ATTR downPressed()
 {
-  Serial.println("down");
-  currentNavigation = "down";
+  currentNavigation = DOWN;
 }
 
 void IRAM_ATTR leftPressed()
 {
-  Serial.println("left");
+  currentNavigation = LEFT;
 }
 
 void setup()
 {
-  Serial.begin(115200);
+  Serial.begin(9600);
 
   // initialize lcd
   lcd.init();
@@ -102,16 +102,35 @@ void setup()
 
 void loop()
 {
-  if (currentNavigation == "up")
+  handleNavigation();
+
+  // run one iteration of the current mode
+}
+
+void handleNavigation()
+{
+  if (currentNavigation == UP)
   {
     menu.switch_focus(false); // go up one line
     menu.update();
-    currentNavigation = "none";
+    Serial.println("UP");
+    currentNavigation = NONE;
   }
-  else if (currentNavigation == "down")
+  else if (currentNavigation == RIGHT)
+  {
+    Serial.println("RIGHT");
+    currentNavigation = NONE;
+  }
+  else if (currentNavigation == DOWN)
   {
     menu.switch_focus(); // go down one line
     menu.update();
-    currentNavigation = "none";
+    Serial.println("DOWN");
+    currentNavigation = NONE;
+  }
+  else if (currentNavigation == LEFT)
+  {
+    Serial.println("LEFT");
+    currentNavigation = NONE;
   }
 }
