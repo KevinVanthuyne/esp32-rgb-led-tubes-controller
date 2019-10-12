@@ -3,6 +3,7 @@
 #include <vector>
 
 #include "LedTube.h"
+#include "Menu.h"
 
 // State implementation for handling different operation modes
 class Mode
@@ -13,16 +14,17 @@ public:
     virtual void changeToStaticMode() = 0;
     virtual void changeToAutoMode() = 0;
     virtual void changeToSoundMode() = 0;
+    Menu *menu;
 
 protected:
-    Mode(std::vector<LedTube> *ledTubes) : ledTubes(ledTubes) {}
+    Mode(Menu *menu, std::vector<LedTube> *ledTubes) : menu(menu), ledTubes(ledTubes) {}
     std::vector<LedTube> *ledTubes;
 };
 
 class StaticMode : public Mode
 {
 public:
-    StaticMode(std::vector<LedTube> *ledTubes) : Mode(ledTubes){};
+    StaticMode(Menu *menu, std::vector<LedTube> *ledTubes) : Mode(menu, ledTubes){};
     void runIteration();
     void changeToStaticMode();
     void changeToAutoMode();
@@ -32,25 +34,4 @@ private:
     uint8_t red = 0;
     uint8_t green = 0;
     uint8_t blue = 0;
-};
-
-class AutoMode : public Mode
-{
-public:
-    AutoMode(std::vector<LedTube> *ledTubes) : Mode(ledTubes){};
-    void runIteration();
-    // changing to other modes reset current iteration
-    void changeToStaticMode();
-    void changeToAutoMode();
-    void changeToSoundMode();
-};
-
-class SoundMode : public Mode
-{
-public:
-    SoundMode(std::vector<LedTube> *ledTubes) : Mode(ledTubes){};
-    void runIteration();
-    void changeToStaticMode();
-    void changeToAutoMode();
-    void changeToSoundMode();
 };
