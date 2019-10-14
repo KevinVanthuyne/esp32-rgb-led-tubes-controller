@@ -16,8 +16,7 @@ LiquidCrystal_I2C lcd(0x27, 20, 4); // (I2C address, amount of characters, amoun
 LiquidMenu liquidMenu(lcd);
 
 // Mode *currentMode;
-// std::shared_ptr<Menu> currentMenu;
-ModesMenu modesMenu;
+std::shared_ptr<Menu> currentMenu;
 Navigation currentNavigation = NONE;
 
 // interrupt handlers for navigation
@@ -70,14 +69,10 @@ void setup()
     ledTubes.push_back(tube);
   }
 
-  // create all menu's
-  // std::shared_ptr<LiquidCrystal_I2C> lcdPointer = std::make_shared<LiquidCrystal_I2C>(lcd);
-  // StaticMenu staticMenu(lcdPointer);
-  // currentMenu = std::make_shared<StaticMenu>(staticMenu);
-
-  // setup menu
+  // setup menu's
   liquidMenu.init();
-  modesMenu = ModesMenu();
+  ModesMenu modesMenu = ModesMenu();
+  currentMenu = std::make_shared<ModesMenu>(modesMenu);
   liquidMenu.update();
 
   // set up modes
@@ -95,19 +90,19 @@ void handleNavigation()
 {
   if (currentNavigation == UP)
   {
-    modesMenu.up();
+    currentMenu->up();
   }
   else if (currentNavigation == RIGHT)
   {
-    modesMenu.right();
+    currentMenu->right();
   }
   else if (currentNavigation == DOWN)
   {
-    modesMenu.down();
+    currentMenu->down();
   }
   else if (currentNavigation == LEFT)
   {
-    modesMenu.left();
+    currentMenu->left();
   }
 
   if (currentNavigation == UP || currentNavigation == RIGHT || currentNavigation == DOWN || currentNavigation == LEFT)
