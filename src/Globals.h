@@ -1,0 +1,9 @@
+#pragma once
+
+#include <LiquidCrystal_I2C.h>
+#include <LiquidMenu.h>
+
+// LiquidMenu objects have to be defined globally to work (sadly)
+// they are initialized in main.cpp
+extern LiquidCrystal_I2C lcd; // (I2C address, amount of characters, amount of lines)
+extern LiquidMenu liquidMenu;

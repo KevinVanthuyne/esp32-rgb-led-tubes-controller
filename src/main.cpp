@@ -1,3 +1,5 @@
+#define MAIN_FILE
+
 #include "main.h"
 
 // input buttons config
@@ -10,12 +12,13 @@
 #define TUBE_COUNT 6
 #define PIXELS_PER_TUBE 60
 
-// Mode *currentMode;
-// std::shared_ptr<Menu> currentMenu;
-Navigation currentNavigation = NONE;
-
 LiquidCrystal_I2C lcd(0x27, 20, 4); // (I2C address, amount of characters, amount of lines)
 LiquidMenu liquidMenu(lcd);
+
+// Mode *currentMode;
+// std::shared_ptr<Menu> currentMenu;
+ModesMenu modesMenu;
+Navigation currentNavigation = NONE;
 
 // interrupt handlers for navigation
 void IRAM_ATTR
@@ -49,23 +52,6 @@ void setup()
   lcd.setCursor(3, 1);
   lcd.print("Starting up...");
 
-  // setup menu
-  liquidMenu.init();
-
-  LiquidLine modesLine(0, 0, "MODES");
-  LiquidLine staticLine(2, 1, "Static");
-  LiquidLine autoLine(2, 2, "Auto");
-  LiquidLine soundLine(2, 3, "Sound");
-  LiquidScreen modesScreen(modesLine, staticLine, autoLine, soundLine);
-  modesScreen.set_focusPosition(Position::LEFT);
-
-  staticLine.attach_function(1, noop); // attach blank function to menu lines so they become focusable
-  autoLine.attach_function(1, noop);
-  soundLine.attach_function(1, noop);
-  liquidMenu.add_screen(modesScreen);
-
-  liquidMenu.update();
-
   // initialize buttons
   pinMode(BUTTON_UP, INPUT_PULLUP);
   pinMode(BUTTON_RIGHT, INPUT_PULLUP);
@@ -89,6 +75,11 @@ void setup()
   // StaticMenu staticMenu(lcdPointer);
   // currentMenu = std::make_shared<StaticMenu>(staticMenu);
 
+  // setup menu
+  liquidMenu.init();
+  modesMenu = ModesMenu();
+  liquidMenu.update();
+
   // set up modes
   // StaticMode staticMode(&staticMenu, &ledTubes);
   // currentMode = &staticMode;
@@ -104,22 +95,19 @@ void handleNavigation()
 {
   if (currentNavigation == UP)
   {
-    // currentMenu->up();
-    liquidMenu.switch_focus(false);
-    Serial.println(UP);
+    modesMenu.up();
   }
   else if (currentNavigation == RIGHT)
   {
-    Serial.println(RIGHT);
+    modesMenu.right();
   }
   else if (currentNavigation == DOWN)
   {
-    liquidMenu.switch_focus();
-    Serial.println(DOWN);
+    modesMenu.down();
   }
   else if (currentNavigation == LEFT)
   {
-    Serial.println(LEFT);
+    modesMenu.left();
   }
 
   if (currentNavigation == UP || currentNavigation == RIGHT || currentNavigation == DOWN || currentNavigation == LEFT)

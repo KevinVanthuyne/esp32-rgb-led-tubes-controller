@@ -3,7 +3,7 @@
 #include <vector>
 
 #include "LedTube.h"
-#include "Menu.h"
+#include "menu/Menu.h"
 
 // State implementation for handling different operation modes
 class Mode
