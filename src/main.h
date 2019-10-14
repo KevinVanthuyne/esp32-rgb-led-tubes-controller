@@ -7,9 +7,9 @@
 #include <LiquidMenu.h>
 
 #include "Globals.h"
+#include "modes/Modes.h"
+#include "menus/Menus.h"
 #include "LedTube.h"
-// #include "Mode.h"
-#include "menu/Menus.h"
 #include "Utils.h"
 
 enum Navigation

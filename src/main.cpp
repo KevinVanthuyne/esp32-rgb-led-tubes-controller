@@ -12,12 +12,14 @@
 #define TUBE_COUNT 6
 #define PIXELS_PER_TUBE 60
 
+// menu variables
 LiquidCrystal_I2C lcd(0x27, 20, 4); // (I2C address, amount of characters, amount of lines)
 LiquidMenu liquidMenu(lcd);
-
-// Mode *currentMode;
-std::shared_ptr<Menu> currentMenu;
 Navigation currentNavigation = NONE;
+
+// mode variables
+std::shared_ptr<AutoMode> autoMode;
+std::shared_ptr<Mode> currentMode;
 
 // interrupt handlers for navigation
 void IRAM_ATTR
@@ -68,16 +70,13 @@ void setup()
     LedTube tube(PIXELS_PER_TUBE);
     ledTubes.push_back(tube);
   }
+  auto ledTubesPointer = std::make_shared<std::vector<LedTube>>(ledTubes);
 
-  // setup menu's
+  // setup LiquidMenu and Modes
   liquidMenu.init();
-  ModesMenu modesMenu = ModesMenu();
-  currentMenu = std::make_shared<ModesMenu>(modesMenu);
+  autoMode = std::make_shared<AutoMode>(AutoMode(ledTubesPointer));
+  currentMode = autoMode;
   liquidMenu.update();
-
-  // set up modes
-  // StaticMode staticMode(&staticMenu, &ledTubes);
-  // currentMode = &staticMode;
 }
 
 void loop()
@@ -90,19 +89,19 @@ void handleNavigation()
 {
   if (currentNavigation == UP)
   {
-    currentMenu->up();
+    currentMode->menu->up();
   }
   else if (currentNavigation == RIGHT)
   {
-    currentMenu->right();
+    currentMode->menu->right();
   }
   else if (currentNavigation == DOWN)
   {
-    currentMenu->down();
+    currentMode->menu->down();
   }
   else if (currentNavigation == LEFT)
   {
-    currentMenu->left();
+    currentMode->menu->left();
   }
 
   if (currentNavigation == UP || currentNavigation == RIGHT || currentNavigation == DOWN || currentNavigation == LEFT)

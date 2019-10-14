@@ -5,10 +5,10 @@
 #include "Globals.h"
 #include "Menu.h"
 
-class ModesMenu : public Menu
+class AutoMenu : public Menu
 {
 public:
-    ModesMenu();
+    AutoMenu();
     void up();
     void right();
     void down();
