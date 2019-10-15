@@ -9,6 +9,7 @@
 #include "Globals.h"
 #include "modes/Modes.h"
 #include "menus/Menus.h"
+#include "programs/Programs.h"
 #include "LedTube.h"
 #include "Utils.h"
 
