@@ -1,14 +1,16 @@
 #pragma once
 
+#include <Adafruit_NeoPixel.h>
+
 class LedTube
 {
 public:
-    LedTube(int pixelCount) : pixelCount(pixelCount){};
-    int getPixelCount()
+    LedTube(Adafruit_NeoPixel *strip)
     {
-        return pixelCount;
+        strip->begin();
+        strip->setBrightness(10);
+        strip->show();
+        ledStrip = strip;
     }
-
-private:
-    int pixelCount;
+    Adafruit_NeoPixel *ledStrip;
 };

@@ -1,17 +1,16 @@
 #pragma once
 
+#include "../Globals.h"
 #include "Mode.h"
 #include "../menus/AutoMenu.h"
 
 class AutoMode : public Mode
 {
 public:
-    AutoMode(std::shared_ptr<std::vector<LedTube>> ledTubes) : Mode(std::make_shared<AutoMenu>(AutoMenu()), ledTubes) {}
-    void runIteration() {}
-    void changeToStaticMode() {}
-    void changeToAutoMode() {}
-    void changeToSoundMode() {}
+    AutoMode() {}
+    AutoMode(Menu *menu, std::vector<LedTube *> *ledTubes) : Mode(menu, ledTubes), currentIteration(0) {}
+    void runIteration();
 
 private:
-    uint iteration;
+    uint currentIteration;
 };
