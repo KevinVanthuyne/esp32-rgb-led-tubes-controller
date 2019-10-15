@@ -9,17 +9,24 @@
 #define BUTTON_LEFT 33
 
 // led tube config
-#define TUBE_COUNT 6
+#define TUBE_COUNT 1
 #define PIXELS_PER_TUBE 60
+#define TUBE_1_PIN 5 // Not all ESP32 pins seem to be valid
+
+Adafruit_NeoPixel ledStrip1(PIXELS_PER_TUBE, TUBE_1_PIN, NEO_GRB + NEO_KHZ800);
+LedTube ledTube1(&ledStrip1);
+std::vector<LedTube *> ledTubes;
 
 // menu variables
 LiquidCrystal_I2C lcd(0x27, 20, 4); // (I2C address, amount of characters, amount of lines)
 LiquidMenu liquidMenu(lcd);
 Navigation currentNavigation = NONE;
 
+AutoMenu autoMenu;
+
 // mode variables
-std::shared_ptr<AutoMode> autoMode;
-std::shared_ptr<Mode> currentMode;
+AutoMode autoMode;
+Mode *currentMode;
 
 // interrupt handlers for navigation
 void IRAM_ATTR
@@ -64,44 +71,43 @@ void setup()
   attachInterrupt(BUTTON_LEFT, leftPressed, FALLING);
 
   // set up led tubes
-  std::vector<LedTube> ledTubes;
-  for (int i = 0; i < TUBE_COUNT; i++)
-  {
-    LedTube tube(PIXELS_PER_TUBE);
-    ledTubes.push_back(tube);
-  }
-  auto ledTubesPointer = std::make_shared<std::vector<LedTube>>(ledTubes);
+  ledTubes.push_back(&ledTube1);
+
+  // setup menu's
+  autoMenu = AutoMenu();
 
   // setup LiquidMenu and Modes
   liquidMenu.init();
-  autoMode = std::make_shared<AutoMode>(AutoMode(ledTubesPointer));
-  currentMode = autoMode;
+  autoMode = AutoMode(&autoMenu, &ledTubes);
+  currentMode = &autoMode;
   liquidMenu.update();
 }
 
 void loop()
 {
   handleNavigation();
-  //currentMode->runIteration();
+  currentMode->runIteration();
 }
 
 void handleNavigation()
 {
-  if (currentNavigation == UP)
+  switch (currentNavigation)
   {
+  case UP:
     currentMode->menu->up();
-  }
-  else if (currentNavigation == RIGHT)
-  {
+    break;
+  case RIGHT:
     currentMode->menu->right();
-  }
-  else if (currentNavigation == DOWN)
-  {
+    break;
+  case DOWN:
     currentMode->menu->down();
-  }
-  else if (currentNavigation == LEFT)
-  {
+    break;
+  case LEFT:
     currentMode->menu->left();
+    break;
+  default:
+    currentNavigation = NONE;
+    break;
   }
 
   if (currentNavigation == UP || currentNavigation == RIGHT || currentNavigation == DOWN || currentNavigation == LEFT)
