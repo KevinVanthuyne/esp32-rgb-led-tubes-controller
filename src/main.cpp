@@ -28,6 +28,9 @@ AutoMenu autoMenu;
 AutoMode autoMode;
 Mode *currentMode;
 
+// programs
+ColorCycleProgram colorCycle;
+
 // interrupt handlers for navigation
 void IRAM_ATTR
 upPressed()
