@@ -25,6 +25,8 @@ Navigation currentNavigation = NONE;
 AutoMenu autoMenu;
 
 // mode variables
+int currentProgram = 1;
+uint8_t programSpeed = 128; // ranges from 0 to 255
 AutoMode autoMode;
 Mode *currentMode;
 

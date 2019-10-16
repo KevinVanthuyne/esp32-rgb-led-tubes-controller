@@ -9,3 +9,6 @@
 // they are initialized in main.cpp
 extern LiquidCrystal_I2C lcd; // (I2C address, amount of characters, amount of lines)
 extern LiquidMenu liquidMenu;
+
+extern int currentProgram;
+extern uint8_t programSpeed;
