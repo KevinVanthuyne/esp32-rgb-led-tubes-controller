@@ -14,7 +14,7 @@ class AutoMode : public Mode
 {
 public:
     AutoMode() {}
-    AutoMode(Menu *menu, std::vector<LedTube *> *ledTubes) : Mode(menu, ledTubes), currentProgram(2), speed(128)
+    AutoMode(Menu *menu, std::vector<LedTube *> *ledTubes) : Mode(menu, ledTubes), speed(128)
     {
         colorCycleProgram = ColorCycleProgram(ledTubes);
         colorSweepProgram = ColorSweepProgram(ledTubes);
@@ -22,6 +22,5 @@ public:
     void runIteration();
 
 private:
-    uint currentProgram;
     uint8_t speed;
 };

@@ -25,6 +25,7 @@ Navigation currentNavigation = NONE;
 AutoMenu autoMenu;
 
 // mode variables
+int currentProgram = 0;
 AutoMode autoMode;
 Mode *currentMode;
 

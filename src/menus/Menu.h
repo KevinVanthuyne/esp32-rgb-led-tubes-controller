@@ -18,3 +18,9 @@ public:
     virtual void down() = 0;
     virtual void left() = 0;
 };
+
+enum Direction
+{
+    RIGHT_PRESS = 1,
+    LEFT_PRESS = 2,
+};
