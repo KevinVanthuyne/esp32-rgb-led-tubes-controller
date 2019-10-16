@@ -5,7 +5,10 @@ void AutoMode::runIteration()
     switch (currentProgram)
     {
     case 1:
-        colorCycle.runIteration(speed);
+        colorCycleProgram.runIteration(speed);
+        break;
+    case 2:
+        colorSweepProgram.runIteration(speed);
         break;
     }
 }

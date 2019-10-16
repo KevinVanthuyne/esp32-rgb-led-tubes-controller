@@ -16,14 +16,9 @@ public:
     {
         Adafruit_NeoPixel *strip = ledTubes->at(0)->ledStrip;
 
-        int number;
-        do
-        {
-            number = getRandomNumber(0, 8);
-        } while (number == previousNumber);
+        int number = getRandomNumber(0, 8, previousNumber);
         previousNumber = number;
 
-        Serial.println(number);
         strip->fill(colors[number]);
         strip->show();
 

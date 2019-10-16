@@ -29,7 +29,8 @@ AutoMode autoMode;
 Mode *currentMode;
 
 // programs
-ColorCycleProgram colorCycle;
+ColorCycleProgram colorCycleProgram;
+ColorSweepProgram colorSweepProgram;
 
 // interrupt handlers for navigation
 void IRAM_ATTR
