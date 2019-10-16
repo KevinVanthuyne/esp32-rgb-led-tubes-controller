@@ -7,15 +7,17 @@
 #include "../programs/Programs.h"
 
 // globally defined programs from main.cpp
-extern ColorCycleProgram colorCycle;
+extern ColorCycleProgram colorCycleProgram;
+extern ColorSweepProgram colorSweepProgram;
 
 class AutoMode : public Mode
 {
 public:
     AutoMode() {}
-    AutoMode(Menu *menu, std::vector<LedTube *> *ledTubes) : Mode(menu, ledTubes), currentProgram(1), speed(128)
+    AutoMode(Menu *menu, std::vector<LedTube *> *ledTubes) : Mode(menu, ledTubes), currentProgram(2), speed(128)
     {
-        colorCycle = ColorCycleProgram(ledTubes);
+        colorCycleProgram = ColorCycleProgram(ledTubes);
+        colorSweepProgram = ColorSweepProgram(ledTubes);
     }
     void runIteration();
 
