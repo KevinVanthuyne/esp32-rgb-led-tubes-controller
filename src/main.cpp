@@ -31,6 +31,8 @@ AutoMode autoMode;
 Mode *currentMode;
 
 // programs
+int delayTime = 0;
+unsigned long previousMillis = 0;
 ColorCycleProgram colorCycleProgram;
 ColorCycleSmoothProgram colorCycleSmoothProgram;
 ColorSweepProgram colorSweepProgram;
@@ -93,7 +95,13 @@ void setup()
 void loop()
 {
   handleNavigation();
-  currentMode->runIteration();
+
+  unsigned long currentMillis = millis();
+  if (currentMillis - previousMillis >= delayTime)
+  {
+    delayTime = currentMode->runIteration();
+    previousMillis = currentMillis;
+  }
 }
 
 void handleNavigation()
