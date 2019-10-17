@@ -21,5 +21,5 @@ public:
         colorCycleSmoothProgram = ColorCycleSmoothProgram(ledTubes);
         colorSweepProgram = ColorSweepProgram(ledTubes);
     }
-    void runIteration();
+    int runIteration();
 };

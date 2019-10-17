@@ -11,7 +11,7 @@ class Mode
 public:
     Mode() {}
     virtual ~Mode() {}
-    virtual void runIteration() = 0;
+    virtual int runIteration() = 0;
     // To be implememented when more modes are added
     // virtual void changeToStaticMode() = 0;
     // virtual void changeToAutoMode() = 0;

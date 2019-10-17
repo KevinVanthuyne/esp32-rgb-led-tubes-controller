@@ -12,7 +12,7 @@ class ColorSweepProgram : public Program
 public:
     ColorSweepProgram() {}
     ColorSweepProgram(std::vector<LedTube *> *ledTubes) : Program(ledTubes), currentColor(red), previousNumber(-1) {}
-    void runIteration(uint8_t speed)
+    int runIteration(uint8_t speed)
     {
         Adafruit_NeoPixel *strip = ledTubes->at(0)->ledStrip;
 
@@ -28,9 +28,8 @@ public:
         strip->setPixelColor(currentIteration, currentColor);
         strip->show();
 
-        int delayTime = map(speed, 0, 255, 100, 5);
         currentIteration++;
-        delay(delayTime);
+        return map(speed, 0, 255, 100, 1);
     }
 
 private:

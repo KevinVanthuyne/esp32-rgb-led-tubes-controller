@@ -12,7 +12,7 @@ class ColorCycleProgram : public Program
 public:
     ColorCycleProgram() {}
     ColorCycleProgram(std::vector<LedTube *> *ledTubes) : Program(ledTubes), previousNumber(-1) {}
-    void runIteration(uint8_t speed)
+    int runIteration(uint8_t speed)
     {
         Adafruit_NeoPixel *strip = ledTubes->at(0)->ledStrip;
 
@@ -22,8 +22,7 @@ public:
         strip->fill(colors[number]);
         strip->show();
 
-        int delayTime = map(speed, 0, 255, 500, 2000);
-        delay(delayTime);
+        return map(speed, 0, 255, 2000, 1);
     }
 
 private:

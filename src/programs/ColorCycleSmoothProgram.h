@@ -12,7 +12,7 @@ class ColorCycleSmoothProgram : public Program
 public:
     ColorCycleSmoothProgram() {}
     ColorCycleSmoothProgram(std::vector<LedTube *> *ledTubes) : Program(ledTubes) {}
-    void runIteration(uint8_t speed)
+    int runIteration(uint8_t speed)
     {
         Adafruit_NeoPixel *strip = ledTubes->at(0)->ledStrip;
         int hue = currentIteration * 256;
@@ -23,8 +23,7 @@ public:
         strip->fill(strip->gamma32(strip->ColorHSV(hue)));
         strip->show();
 
-        int delayTime = map(speed, 0, 255, 500, 2);
         currentIteration++;
-        delay(delayTime);
+        return map(speed, 0, 255, 500, 1);
     }
 };

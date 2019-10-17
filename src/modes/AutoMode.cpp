@@ -1,18 +1,17 @@
 #include "AutoMode.h"
 
-void AutoMode::runIteration()
+int AutoMode::runIteration()
 {
     switch (currentProgram)
     {
     // TODO program 0 will cycle through all programs automatically
     case 1:
-        colorCycleProgram.runIteration(programSpeed);
-        break;
+        return colorCycleProgram.runIteration(programSpeed);
     case 2:
-        colorCycleSmoothProgram.runIteration(programSpeed);
-        break;
+        return colorCycleSmoothProgram.runIteration(programSpeed);
     case 3:
-        colorSweepProgram.runIteration(programSpeed);
-        break;
+        return colorSweepProgram.runIteration(programSpeed);
+    default:
+        return 0;
     }
 }
