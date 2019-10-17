@@ -9,6 +9,9 @@ void AutoMode::runIteration()
         colorCycleProgram.runIteration(programSpeed);
         break;
     case 2:
+        colorCycleSmoothProgram.runIteration(programSpeed);
+        break;
+    case 3:
         colorSweepProgram.runIteration(programSpeed);
         break;
     }

@@ -8,6 +8,7 @@
 
 // globally defined programs from main.cpp
 extern ColorCycleProgram colorCycleProgram;
+extern ColorCycleSmoothProgram colorCycleSmoothProgram;
 extern ColorSweepProgram colorSweepProgram;
 
 class AutoMode : public Mode
@@ -17,6 +18,7 @@ public:
     AutoMode(Menu *menu, std::vector<LedTube *> *ledTubes) : Mode(menu, ledTubes)
     {
         colorCycleProgram = ColorCycleProgram(ledTubes);
+        colorCycleSmoothProgram = ColorCycleSmoothProgram(ledTubes);
         colorSweepProgram = ColorSweepProgram(ledTubes);
     }
     void runIteration();

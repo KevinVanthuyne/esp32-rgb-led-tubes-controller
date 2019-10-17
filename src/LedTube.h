@@ -8,7 +8,7 @@ public:
     LedTube(Adafruit_NeoPixel *strip)
     {
         strip->begin();
-        strip->setBrightness(10);
+        strip->setBrightness(128);
         strip->show();
         ledStrip = strip;
     }

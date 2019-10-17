@@ -28,7 +28,7 @@ public:
         strip->setPixelColor(currentIteration, currentColor);
         strip->show();
 
-        int delayTime = map(speed, 0, 255, 5, 100);
+        int delayTime = map(speed, 0, 255, 100, 5);
         currentIteration++;
         delay(delayTime);
     }

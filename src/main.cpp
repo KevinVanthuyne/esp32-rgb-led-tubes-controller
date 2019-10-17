@@ -32,6 +32,7 @@ Mode *currentMode;
 
 // programs
 ColorCycleProgram colorCycleProgram;
+ColorCycleSmoothProgram colorCycleSmoothProgram;
 ColorSweepProgram colorSweepProgram;
 
 // interrupt handlers for navigation
