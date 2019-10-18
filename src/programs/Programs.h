@@ -1,7 +1,10 @@
 #pragma once
 
-#define AMOUNT_OF_PROGRAMS 3 // used for checking if the currentProgram can be increased or not
+#define AMOUNT_OF_PROGRAMS 6 // used for checking if the currentProgram can be increased or not
 
 #include "ColorCycleProgram.h"
 #include "ColorCycleSmoothProgram.h"
 #include "ColorSweepProgram.h"
+#include "ColorSweepInToOutProgram.h"
+#include "ColorSweepOutToInProgram.h"
+#include "ColorSweepInToOutToInProgram.h"
