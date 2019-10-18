@@ -7,18 +7,19 @@
 #include "Program.h"
 #include "../Utils.h"
 
-class ColorSweepInOutProgram : public Program
+class ColorSweepOutToInProgram : public Program
 {
 public:
-    ColorSweepInOutProgram() {}
-    ColorSweepInOutProgram(std::vector<LedTube *> *ledTubes) : Program(ledTubes), currentColor(red), previousNumber(-1) {}
-    void runIteration(uint8_t speed)
+    ColorSweepOutToInProgram() {}
+    ColorSweepOutToInProgram(std::vector<LedTube *> *ledTubes) : Program(ledTubes), currentColor(red), previousNumber(-1) {}
+    int runIteration(uint8_t speed)
     {
         Adafruit_NeoPixel *strip = ledTubes->at(0)->ledStrip;
 
-        if (currentIteration >= strip->numPixels())
+        int center = (int)floor(strip->numPixels() / 2);
+
+        if (currentIteration >= center)
         {
-            // reset iteration and get a new random color
             currentIteration = 0;
             int number = getRandomNumber(0, 8, previousNumber);
             currentColor = colors[number];
@@ -26,11 +27,11 @@ public:
         }
 
         strip->setPixelColor(currentIteration, currentColor);
+        strip->setPixelColor(strip->numPixels() - currentIteration - 1, currentColor);
         strip->show();
 
-        int delayTime = map(speed, 0, 255, 100, 5);
         currentIteration++;
-        delay(delayTime);
+        return map(speed, 0, 255, 100, 5);
     }
 
 private:

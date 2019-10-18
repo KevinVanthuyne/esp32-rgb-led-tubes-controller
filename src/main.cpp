@@ -36,7 +36,9 @@ unsigned long previousMillis = 0;
 ColorCycleProgram colorCycleProgram;
 ColorCycleSmoothProgram colorCycleSmoothProgram;
 ColorSweepProgram colorSweepProgram;
-ColorSweepInOutProgram colorSweepInOutProgram;
+ColorSweepInToOutProgram colorSweepInToOutProgram;
+ColorSweepOutToInProgram colorSweepOutToInProgram;
+ColorSweepInToOutToInProgram colorSweepInToOutToInProgram;
 
 // interrupt handlers for navigation
 void IRAM_ATTR

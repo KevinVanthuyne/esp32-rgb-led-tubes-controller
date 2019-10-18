@@ -11,6 +11,12 @@ int AutoMode::runIteration()
         return colorCycleSmoothProgram.runIteration(programSpeed);
     case 3:
         return colorSweepProgram.runIteration(programSpeed);
+    case 4:
+        return colorSweepInToOutProgram.runIteration(programSpeed);
+    case 5:
+        return colorSweepOutToInProgram.runIteration(programSpeed);
+    case 6:
+        return colorSweepInToOutToInProgram.runIteration(programSpeed);
     default:
         return 0;
     }
