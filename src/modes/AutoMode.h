@@ -10,6 +10,7 @@
 extern ColorCycleProgram colorCycleProgram;
 extern ColorCycleSmoothProgram colorCycleSmoothProgram;
 extern ColorSweepProgram colorSweepProgram;
+extern ColorSweepInOutProgram colorSweepInOutProgram;
 
 class AutoMode : public Mode
 {
@@ -20,6 +21,7 @@ public:
         colorCycleProgram = ColorCycleProgram(ledTubes);
         colorCycleSmoothProgram = ColorCycleSmoothProgram(ledTubes);
         colorSweepProgram = ColorSweepProgram(ledTubes);
+        colorSweepInOutProgram = ColorSweepInOutProgram(ledTubes);
     }
     int runIteration();
 };

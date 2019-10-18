@@ -10,7 +10,7 @@
 
 // led tube config
 #define TUBE_COUNT 1
-#define PIXELS_PER_TUBE 60
+#define PIXELS_PER_TUBE 58
 #define TUBE_1_PIN 5 // Not all ESP32 pins seem to be valid
 
 Adafruit_NeoPixel ledStrip1(PIXELS_PER_TUBE, TUBE_1_PIN, NEO_GRB + NEO_KHZ800);
@@ -36,6 +36,7 @@ unsigned long previousMillis = 0;
 ColorCycleProgram colorCycleProgram;
 ColorCycleSmoothProgram colorCycleSmoothProgram;
 ColorSweepProgram colorSweepProgram;
+ColorSweepInOutProgram colorSweepInOutProgram;
 
 // interrupt handlers for navigation
 void IRAM_ATTR
