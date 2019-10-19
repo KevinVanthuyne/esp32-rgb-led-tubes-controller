@@ -11,12 +11,16 @@ void increaseCurrentProgram()
 {
     if (currentProgram < AMOUNT_OF_PROGRAMS)
         currentProgram++;
+    else if (currentProgram == AMOUNT_OF_PROGRAMS)
+        currentProgram = 1;
 }
 
 void decreaseCurrentProgram()
 {
     if (currentProgram > 1)
         currentProgram--;
+    else if (currentProgram == 1)
+        currentProgram = AMOUNT_OF_PROGRAMS;
 }
 
 void increaseSpeed()
