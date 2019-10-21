@@ -24,9 +24,14 @@ public:
             if (wasReset)
             {
                 goingToEdges = false; // now going from edges to center
+                strip->setPixelColor(0, currentColor);
+                strip->setPixelColor(strip->numPixels() - 1, currentColor);
             }
-            strip->setPixelColor(center + currentIteration, currentColor);
-            strip->setPixelColor(center - currentIteration, currentColor);
+            else
+            {
+                strip->setPixelColor(center + currentIteration, currentColor);
+                strip->setPixelColor(center - currentIteration, currentColor);
+            }
         }
         else
         {
@@ -34,9 +39,13 @@ public:
             if (wasReset)
             {
                 goingToEdges = true; // now going from center to edges
+                strip->setPixelColor(center, currentColor);
             }
-            strip->setPixelColor(currentIteration, currentColor);
-            strip->setPixelColor(strip->numPixels() - currentIteration - 1, currentColor);
+            else
+            {
+                strip->setPixelColor(currentIteration, currentColor);
+                strip->setPixelColor(strip->numPixels() - currentIteration - 1, currentColor);
+            }
         }
         delay(1); // delay to make sure all pixel data is processed correctly, since there is some trouble with the NeoPixel library and the ESP32
         strip->show();

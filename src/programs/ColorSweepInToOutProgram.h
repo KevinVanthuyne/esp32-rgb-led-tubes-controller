@@ -18,7 +18,7 @@ public:
 
         int center = (int)floor(strip->numPixels() / 2);
 
-        if (currentIteration >= center)
+        if (currentIteration > center)
         {
             currentIteration = 0;
             int number = getRandomNumber(0, 8, previousNumber);
