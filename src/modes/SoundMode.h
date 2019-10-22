@@ -19,5 +19,5 @@ private:
     int sampleDelay;
     unsigned int previousIterationMillis;
     unsigned int previousSampleMillis;
-    void sampleMicrophone();
+    bool detectPeak();
 };

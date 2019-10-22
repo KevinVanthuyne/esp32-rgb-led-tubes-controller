@@ -7,8 +7,9 @@ void SoundMode::runIteration()
     // only samples the microphone when the required delay has passed
     if (currentMillis - previousSampleMillis >= sampleDelay)
     {
-        sampleMicrophone();
-        //adjust the iteration delay according to measured tempo
+        if (detectPeak())
+            colorCycleProgram.runIteration(0);
+        // TODO: adjust the iteration delay according to measured tempo
         previousSampleMillis = currentMillis;
     }
 
@@ -21,10 +22,11 @@ void SoundMode::runIteration()
     }
 }
 
-void SoundMode::sampleMicrophone()
+bool SoundMode::detectPeak()
 {
     int micValue = analogRead(micPin);
     Serial.println(micValue);
     if (micValue > 2500)
-        Serial.println("-------------------------------------------------");
+        return true;
+    return false;
 }
