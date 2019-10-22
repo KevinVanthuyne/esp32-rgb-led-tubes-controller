@@ -23,12 +23,17 @@ LiquidMenu liquidMenu(lcd);
 Navigation currentNavigation = NONE;
 
 AutoMenu autoMenu;
+SoundMenu soundMenu;
 
 // mode variables
+AutoMode autoMode;
+SoundMode soundMode;
+std::vector<Mode *> modes;
+
+int currentMode = 0;
+int amountOfModes;
 int currentProgram = 1;
 uint8_t programSpeed = 128; // ranges from 0 to 255
-AutoMode autoMode;
-Mode *currentMode;
 
 // programs
 int delayTime = 0;
@@ -87,11 +92,15 @@ void setup()
 
   // setup menu's
   autoMenu = AutoMenu();
+  soundMenu = SoundMenu();
 
   // setup LiquidMenu and Modes
   liquidMenu.init();
   autoMode = AutoMode(&autoMenu, &ledTubes);
-  currentMode = &autoMode;
+  soundMode = SoundMode(&soundMenu, &ledTubes);
+  modes.push_back(&autoMode);
+  modes.push_back(&soundMode);
+  amountOfModes = modes.size();
   liquidMenu.update();
 }
 
@@ -102,7 +111,7 @@ void loop()
   unsigned long currentMillis = millis();
   if (currentMillis - previousMillis >= delayTime)
   {
-    delayTime = currentMode->runIteration();
+    delayTime = modes.at(currentMode)->runIteration();
     previousMillis = currentMillis;
   }
 }
@@ -112,16 +121,16 @@ void handleNavigation()
   switch (currentNavigation)
   {
   case UP:
-    currentMode->menu->up();
+    modes.at(currentMode)->menu->up();
     break;
   case RIGHT:
-    currentMode->menu->right();
+    modes.at(currentMode)->menu->right();
     break;
   case DOWN:
-    currentMode->menu->down();
+    modes.at(currentMode)->menu->down();
     break;
   case LEFT:
-    currentMode->menu->left();
+    modes.at(currentMode)->menu->left();
     break;
   default:
     currentNavigation = NONE;

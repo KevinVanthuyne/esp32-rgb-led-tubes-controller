@@ -7,6 +7,7 @@
 #include <LiquidMenu.h>
 
 #include "../Utils.h"
+#include "../Globals.h"
 
 class Menu
 {
@@ -17,6 +18,10 @@ public:
     virtual void right() = 0;
     virtual void down() = 0;
     virtual void left() = 0;
+
+protected:
+    static void nextMode();
+    static void previousMode();
 };
 
 enum Direction

@@ -7,6 +7,7 @@ LiquidLine speedLine(2, 2, "Speed: ", programSpeed);
 LiquidScreen autoModeScreen(autoModeLine, programLine, speedLine);
 
 // callback functions for the menu
+
 void increaseCurrentProgram()
 {
     if (currentProgram < AMOUNT_OF_PROGRAMS)
@@ -39,7 +40,8 @@ void decreaseSpeed()
 AutoMenu::AutoMenu()
 {
     autoModeScreen.set_focusPosition(Position::LEFT);
-    autoModeLine.attach_function(1, noop); // attach blank function to menu lines so they become focusable
+    autoModeLine.attach_function(RIGHT_PRESS, Menu::nextMode);
+    autoModeLine.attach_function(LEFT_PRESS, Menu::previousMode);
     programLine.attach_function(RIGHT_PRESS, increaseCurrentProgram);
     programLine.attach_function(LEFT_PRESS, decreaseCurrentProgram);
     speedLine.attach_function(RIGHT_PRESS, increaseSpeed);
