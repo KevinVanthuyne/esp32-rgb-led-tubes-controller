@@ -12,10 +12,10 @@ class ColorCycleSmoothProgram : public Program
 public:
     ColorCycleSmoothProgram() {}
     ColorCycleSmoothProgram(std::vector<LedTube *> *ledTubes) : Program(ledTubes) {}
-    int runIteration(uint8_t speed)
+    int runIteration(int timeToCompleteFullAnimation)
     {
         Adafruit_NeoPixel *strip = ledTubes->at(0)->ledStrip;
-        int hue = currentIteration * 256;
+        int hue = currentIteration * 256; // = 256 steps to cycle animation
 
         if (hue > 65536) // 65536 is the maximum hue value
             currentIteration = 0;
@@ -25,6 +25,6 @@ public:
         strip->show();
 
         currentIteration++;
-        return map(speed, 0, 255, 500, 1);
+        return timeToCompleteFullAnimation / 256;
     }
 };

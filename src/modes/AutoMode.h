@@ -6,6 +6,8 @@
 #include "../Utils.h"
 #include "../programs/Programs.h"
 
+extern uint8_t programSpeed;
+
 class AutoMode : public Mode
 {
 public:

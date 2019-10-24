@@ -15,3 +15,5 @@ extern int currentMode;
 extern int amountOfModes;
 extern int currentProgram;
 extern uint8_t programSpeed;
+extern volatile int averageMsBetweenBeats;
+extern volatile bool programRan;

@@ -8,8 +8,7 @@
 #define BUTTON_DOWN 32
 #define BUTTON_LEFT 33
 
-// mic config
-#define MIC_PIN 34
+// mic pin has to be set in SoundMode.h
 
 // led tube config
 #define TUBE_COUNT 1
@@ -37,6 +36,8 @@ int currentMode = 0;
 int amountOfModes;
 int currentProgram = 1;
 uint8_t programSpeed = 128; // ranges from 0 to 255
+volatile int averageMsBetweenBeats = 500;
+volatile bool programRan = true;
 
 // programs
 ColorCycleProgram colorCycleProgram;
@@ -45,6 +46,8 @@ ColorSweepProgram colorSweepProgram;
 ColorSweepInToOutProgram colorSweepInToOutProgram;
 ColorSweepOutToInProgram colorSweepOutToInProgram;
 ColorSweepInToOutToInProgram colorSweepInToOutToInProgram;
+
+// TaskHandle_t bpmAnalyzerTask;
 
 // interrupt handlers for navigation
 void IRAM_ATTR
@@ -71,7 +74,7 @@ void IRAM_ATTR leftPressed()
 void setup()
 {
   Serial.begin(9600);
-  pinMode(MIC_PIN, INPUT);
+  // pinMode(MIC_PIN, INPUT);
 
   // initialize LCD (make sure to uncomment the LiquidCrystel_I2C part in the LiquidMenu_config.h)
   lcd.init();
@@ -99,11 +102,21 @@ void setup()
   // setup LiquidMenu and Modes
   liquidMenu.init();
   autoMode = AutoMode(&autoMenu, &ledTubes);
-  soundMode = SoundMode(&soundMenu, &ledTubes, MIC_PIN);
+  soundMode = SoundMode(&soundMenu, &ledTubes);
   modes.push_back(&autoMode);
   modes.push_back(&soundMode);
   amountOfModes = modes.size();
   liquidMenu.update();
+
+  // setup task
+  // xTaskCreatePinnedToCore(
+  //     soundMode.analyzeBpm, /* Task function. */
+  //     "bpmAnalyzerTask",    /* name of task. */
+  //     10000,                /* Stack size of task */
+  //     NULL,                 /* parameter of the task */
+  //     1,                    /* priority of the task */
+  //     &bpmAnalyzerTask,     /* Task handle to keep track of created task */
+  //     0);                   /* pin task to core 0 */
 }
 
 void loop()

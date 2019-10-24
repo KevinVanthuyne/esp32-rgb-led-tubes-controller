@@ -12,7 +12,7 @@ class ColorSweepInToOutProgram : public Program
 public:
     ColorSweepInToOutProgram() {}
     ColorSweepInToOutProgram(std::vector<LedTube *> *ledTubes) : Program(ledTubes), currentColor(red), previousNumber(-1) {}
-    int runIteration(uint8_t speed)
+    int runIteration(int timeToCompleteFullAnimation)
     {
         Adafruit_NeoPixel *strip = ledTubes->at(0)->ledStrip;
 
@@ -31,7 +31,7 @@ public:
         strip->show();
 
         currentIteration++;
-        return map(speed, 0, 255, 100, 5);
+        return timeToCompleteFullAnimation / (int)floor(strip->numPixels() / 2);
     }
 
 private:

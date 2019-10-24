@@ -13,7 +13,7 @@ public:
     Program() {}
     virtual ~Program() {}
     // runs a single iteration of the program/animation and returns the required wait time
-    virtual int runIteration(uint8_t speed) = 0;
+    virtual int runIteration(int timeToCompleteFullAnimation) = 0;
 
 protected:
     Program(std::vector<LedTube *> *ledTubes) : ledTubes(ledTubes), currentIteration(0) {}
