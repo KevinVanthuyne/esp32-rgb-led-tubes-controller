@@ -1,23 +1,34 @@
 #include "AutoMode.h"
 
-int AutoMode::runIteration()
+void AutoMode::runIteration()
 {
-    switch (currentProgram)
+    unsigned long currentMillis = millis();
+
+    // only runs an iteration of the program when the required delay has passed
+    if (currentMillis - previousIterationMillis >= iterationDelay)
     {
-    // TODO program 0 will cycle through all programs automatically
-    case 1:
-        return colorCycleProgram.runIteration(programSpeed);
-    case 2:
-        return colorCycleSmoothProgram.runIteration(programSpeed);
-    case 3:
-        return colorSweepProgram.runIteration(programSpeed);
-    case 4:
-        return colorSweepInToOutProgram.runIteration(programSpeed);
-    case 5:
-        return colorSweepOutToInProgram.runIteration(programSpeed);
-    case 6:
-        return colorSweepInToOutToInProgram.runIteration(programSpeed);
-    default:
-        return 0;
+        switch (currentProgram)
+        {
+        // TODO program 0 will cycle through all programs automatically
+        case 1:
+            iterationDelay = colorCycleProgram.runIteration(programSpeed);
+            break;
+        case 2:
+            iterationDelay = colorCycleSmoothProgram.runIteration(programSpeed);
+            break;
+        case 3:
+            iterationDelay = colorSweepProgram.runIteration(programSpeed);
+            break;
+        case 4:
+            iterationDelay = colorSweepInToOutProgram.runIteration(programSpeed);
+            break;
+        case 5:
+            iterationDelay = colorSweepOutToInProgram.runIteration(programSpeed);
+            break;
+        case 6:
+            iterationDelay = colorSweepInToOutToInProgram.runIteration(programSpeed);
+            break;
+        }
+        previousIterationMillis = currentMillis;
     }
 }

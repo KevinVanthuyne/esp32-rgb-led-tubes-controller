@@ -8,6 +8,9 @@
 #define BUTTON_DOWN 32
 #define BUTTON_LEFT 33
 
+// mic config
+#define MIC_PIN 34
+
 // led tube config
 #define TUBE_COUNT 1
 #define PIXELS_PER_TUBE 58
@@ -23,16 +26,20 @@ LiquidMenu liquidMenu(lcd);
 Navigation currentNavigation = NONE;
 
 AutoMenu autoMenu;
+SoundMenu soundMenu;
 
 // mode variables
+AutoMode autoMode;
+SoundMode soundMode;
+std::vector<Mode *> modes;
+
+int currentMode = 0;
+int amountOfModes;
 int currentProgram = 1;
 uint8_t programSpeed = 128; // ranges from 0 to 255
-AutoMode autoMode;
-Mode *currentMode;
+float soundSensitivity = 0.1;
 
 // programs
-int delayTime = 0;
-unsigned long previousMillis = 0;
 ColorCycleProgram colorCycleProgram;
 ColorCycleSmoothProgram colorCycleSmoothProgram;
 ColorSweepProgram colorSweepProgram;
@@ -65,6 +72,7 @@ void IRAM_ATTR leftPressed()
 void setup()
 {
   Serial.begin(9600);
+  pinMode(MIC_PIN, INPUT);
 
   // initialize LCD (make sure to uncomment the LiquidCrystel_I2C part in the LiquidMenu_config.h)
   lcd.init();
@@ -73,10 +81,10 @@ void setup()
   lcd.print("Starting up...");
 
   // initialize buttons
-  pinMode(BUTTON_UP, INPUT_PULLUP);
-  pinMode(BUTTON_RIGHT, INPUT_PULLUP);
-  pinMode(BUTTON_DOWN, INPUT_PULLUP);
-  pinMode(BUTTON_LEFT, INPUT_PULLUP);
+  pinMode(BUTTON_UP, INPUT_PULLDOWN);
+  pinMode(BUTTON_RIGHT, INPUT_PULLDOWN);
+  pinMode(BUTTON_DOWN, INPUT_PULLDOWN);
+  pinMode(BUTTON_LEFT, INPUT_PULLDOWN);
   attachInterrupt(BUTTON_UP, upPressed, FALLING);
   attachInterrupt(BUTTON_RIGHT, rightPressed, FALLING);
   attachInterrupt(BUTTON_DOWN, downPressed, FALLING);
@@ -87,24 +95,22 @@ void setup()
 
   // setup menu's
   autoMenu = AutoMenu();
+  soundMenu = SoundMenu();
 
   // setup LiquidMenu and Modes
   liquidMenu.init();
   autoMode = AutoMode(&autoMenu, &ledTubes);
-  currentMode = &autoMode;
+  soundMode = SoundMode(&soundMenu, &ledTubes, MIC_PIN);
+  modes.push_back(&autoMode);
+  modes.push_back(&soundMode);
+  amountOfModes = modes.size();
   liquidMenu.update();
 }
 
 void loop()
 {
   handleNavigation();
-
-  unsigned long currentMillis = millis();
-  if (currentMillis - previousMillis >= delayTime)
-  {
-    delayTime = currentMode->runIteration();
-    previousMillis = currentMillis;
-  }
+  modes.at(currentMode)->runIteration();
 }
 
 void handleNavigation()
@@ -112,16 +118,16 @@ void handleNavigation()
   switch (currentNavigation)
   {
   case UP:
-    currentMode->menu->up();
+    modes.at(currentMode)->menu->up();
     break;
   case RIGHT:
-    currentMode->menu->right();
+    modes.at(currentMode)->menu->right();
     break;
   case DOWN:
-    currentMode->menu->down();
+    modes.at(currentMode)->menu->down();
     break;
   case LEFT:
-    currentMode->menu->left();
+    modes.at(currentMode)->menu->left();
     break;
   default:
     currentNavigation = NONE;

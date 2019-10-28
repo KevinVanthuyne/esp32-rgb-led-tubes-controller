@@ -10,5 +10,8 @@
 extern LiquidCrystal_I2C lcd; // (I2C address, amount of characters, amount of lines)
 extern LiquidMenu liquidMenu;
 
+extern int currentMode;
+extern int amountOfModes;
 extern int currentProgram;
 extern uint8_t programSpeed;
+extern float soundSensitivity;
