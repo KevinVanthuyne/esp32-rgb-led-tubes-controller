@@ -12,6 +12,4 @@ class Filters
 {
 public:
     static float bassFilter(float sample);
-    static float envelopeFilter(float sample);
-    static float beatFilter(float sample);
 };

@@ -7,7 +7,6 @@ LiquidLine speedLine(2, 2, "Speed: ", programSpeed);
 LiquidScreen autoModeScreen(autoModeLine, programLine, speedLine);
 
 // callback functions for the menu
-
 void increaseCurrentProgram()
 {
     if (currentProgram < AMOUNT_OF_PROGRAMS)

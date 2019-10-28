@@ -4,7 +4,6 @@
 #include <LiquidMenu.h>
 
 #include "programs/Programs.h"
-// #include "modes/Mode.h"
 
 // LiquidMenu objects have to be defined globally to work (sadly)
 // they are initialized in main.cpp
