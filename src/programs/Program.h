@@ -18,7 +18,7 @@ public:
 protected:
     Program(std::vector<LedTube *> *ledTubes) : ledTubes(ledTubes), currentIteration(0) {}
     std::vector<LedTube *> *ledTubes;
-    uint currentIteration;
+    int currentIteration;
 
     // colors
     uint32_t red = rgbColor(255, 0, 0);

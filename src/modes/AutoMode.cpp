@@ -31,6 +31,9 @@ void AutoMode::runIteration()
         case 7:
             iterationDelay = sparkleProgram.runIteration(programSpeed);
             break;
+        case 8:
+            iterationDelay = colorScanUpProgram.runIteration(programSpeed);
+            break;
         }
         previousIterationMillis = currentMillis;
     }

@@ -14,6 +14,7 @@ extern ColorSweepInToOutProgram colorSweepInToOutProgram;
 extern ColorSweepOutToInProgram colorSweepOutToInProgram;
 extern ColorSweepInToOutToInProgram colorSweepInToOutToInProgram;
 extern SparkleProgram sparkleProgram;
+extern ColorScanUpProgram colorScanUpProgram;
 
 // Abstract class for other Modes to derive from
 class Mode
@@ -38,6 +39,7 @@ protected:
         colorSweepOutToInProgram = ColorSweepOutToInProgram(ledTubes);
         colorSweepInToOutToInProgram = ColorSweepInToOutToInProgram(ledTubes);
         sparkleProgram = SparkleProgram(ledTubes);
+        colorScanUpProgram = ColorScanUpProgram(ledTubes);
     }
     std::vector<LedTube *> *ledTubes;
 };
