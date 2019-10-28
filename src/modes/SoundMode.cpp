@@ -50,13 +50,13 @@ void SoundMode::sampleMic()
         if (averageBuffer.size() >= averageBufferSize)
         {
             // check if the current average is over or under the threshold compared to the other averages
-            if (currentAverage < totalAverage - totalAverage * thresholdFactor && isEnergetic)
+            if (currentAverage < totalAverage - totalAverage * soundSensitivity && isEnergetic)
             {
                 isEnergetic = false;
                 newCalmProgram();
                 Serial.println("SWITCHED TO SLOWER");
             }
-            else if (currentAverage > totalAverage * (1 + thresholdFactor) && !isEnergetic)
+            else if (currentAverage > totalAverage * (1 + soundSensitivity) && !isEnergetic)
             {
                 isEnergetic = true;
                 newEnergeticProgram();

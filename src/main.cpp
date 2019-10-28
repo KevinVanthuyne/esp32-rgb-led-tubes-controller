@@ -37,6 +37,7 @@ int currentMode = 0;
 int amountOfModes;
 int currentProgram = 1;
 uint8_t programSpeed = 128; // ranges from 0 to 255
+float soundSensitivity = 0.1;
 
 // programs
 ColorCycleProgram colorCycleProgram;

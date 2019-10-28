@@ -14,3 +14,4 @@ extern int currentMode;
 extern int amountOfModes;
 extern int currentProgram;
 extern uint8_t programSpeed;
+extern float soundSensitivity;

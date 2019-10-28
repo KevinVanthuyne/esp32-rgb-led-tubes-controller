@@ -19,7 +19,6 @@ public:
           sampleBuffer({}),
           averageBuffer({}),
           loudestSamplesCount(20), // amount of loudest samples to take from the buffer and calculate average with
-          thresholdFactor(0.1),    // TODO: has to be automatically detected
           isEnergetic(false),
           previousIterationMillis(0),
           previousSampleMillis(0),
@@ -39,7 +38,6 @@ private:
     std::vector<float> sampleBuffer;
     std::vector<float> averageBuffer;
     int loudestSamplesCount;
-    float thresholdFactor; // factor of how much the current sample has to be different from the average to determine whether the music is now calmer or more active
     bool isEnergetic;
 
     unsigned int previousIterationMillis;
