@@ -31,4 +31,6 @@ protected:
     uint32_t purple = rgbColor(128, 0, 255);
     uint32_t pink = rgbColor(255, 0, 255);
     uint32_t colors[9] = {red, orange, yellow, green, cyan, lightBlue, blue, purple, pink};
+    uint32_t white = rgbColor(255, 255, 255);
+    uint32_t black = rgbColor(0, 0, 0);
 };

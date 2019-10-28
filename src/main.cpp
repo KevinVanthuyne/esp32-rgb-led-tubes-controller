@@ -46,6 +46,7 @@ ColorSweepProgram colorSweepProgram;
 ColorSweepInToOutProgram colorSweepInToOutProgram;
 ColorSweepOutToInProgram colorSweepOutToInProgram;
 ColorSweepInToOutToInProgram colorSweepInToOutToInProgram;
+SparkleProgram sparkleProgram;
 
 // interrupt handlers for navigation
 void IRAM_ATTR

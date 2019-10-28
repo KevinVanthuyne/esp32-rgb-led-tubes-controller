@@ -4,6 +4,7 @@
 
 #include "LedTube.h"
 #include "menus/Menu.h"
+#include "programs/Programs.h"
 
 // globally defined programs from main.cpp
 extern ColorCycleProgram colorCycleProgram;
@@ -12,6 +13,7 @@ extern ColorSweepProgram colorSweepProgram;
 extern ColorSweepInToOutProgram colorSweepInToOutProgram;
 extern ColorSweepOutToInProgram colorSweepOutToInProgram;
 extern ColorSweepInToOutToInProgram colorSweepInToOutToInProgram;
+extern SparkleProgram sparkleProgram;
 
 // Abstract class for other Modes to derive from
 class Mode
@@ -35,6 +37,7 @@ protected:
         colorSweepInToOutProgram = ColorSweepInToOutProgram(ledTubes);
         colorSweepOutToInProgram = ColorSweepOutToInProgram(ledTubes);
         colorSweepInToOutToInProgram = ColorSweepInToOutToInProgram(ledTubes);
+        sparkleProgram = SparkleProgram(ledTubes);
     }
     std::vector<LedTube *> *ledTubes;
 };

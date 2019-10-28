@@ -88,6 +88,9 @@ void SoundMode::runProgram()
     case 6:
         iterationDelay = colorSweepInToOutToInProgram.runIteration(programSpeed);
         break;
+    case 7:
+        iterationDelay = sparkleProgram.runIteration(programSpeed);
+        break;
     }
 }
 
