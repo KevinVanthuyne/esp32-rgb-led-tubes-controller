@@ -12,12 +12,21 @@
 #define MIC_PIN 34
 
 // led tube config
-#define TUBE_COUNT 1
+#define TUBE_COUNT 4
 #define PIXELS_PER_TUBE 58
-#define TUBE_1_PIN 5 // Not all ESP32 pins seem to be valid
+#define TUBE_1_PIN 19 // Not all ESP32 pins seem to be valid
+#define TUBE_2_PIN 18
+#define TUBE_3_PIN 5
+#define TUBE_4_PIN 15
 
 Adafruit_NeoPixel ledStrip1(PIXELS_PER_TUBE, TUBE_1_PIN, NEO_GRB + NEO_KHZ800);
+Adafruit_NeoPixel ledStrip2(PIXELS_PER_TUBE, TUBE_2_PIN, NEO_GRB + NEO_KHZ800);
+Adafruit_NeoPixel ledStrip3(PIXELS_PER_TUBE, TUBE_3_PIN, NEO_GRB + NEO_KHZ800);
+Adafruit_NeoPixel ledStrip4(PIXELS_PER_TUBE, TUBE_4_PIN, NEO_GRB + NEO_KHZ800);
 LedTube ledTube1(&ledStrip1);
+LedTube ledTube2(&ledStrip2);
+LedTube ledTube3(&ledStrip3);
+LedTube ledTube4(&ledStrip4);
 std::vector<LedTube *> ledTubes;
 
 // menu variables
@@ -93,6 +102,9 @@ void setup()
 
   // set up led tubes
   ledTubes.push_back(&ledTube1);
+  ledTubes.push_back(&ledTube2);
+  ledTubes.push_back(&ledTube3);
+  ledTubes.push_back(&ledTube4);
 
   // setup menu's
   autoMenu = AutoMenu();

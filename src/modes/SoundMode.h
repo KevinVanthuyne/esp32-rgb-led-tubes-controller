@@ -47,8 +47,8 @@ private:
     void runProgram();
     float calculateCurrentAverage();
     float calculateAverageOfAverages();
-    std::vector<int> calmPrograms = {1, 2, 3, 4, 5, 6};   // list of calm programs to choose from (as defined by the switch case in runIteration)
-    std::vector<int> energeticPrograms = {1, 3, 4, 5, 6}; // list of energetic programs to choose from
+    std::vector<int> calmPrograms = {1, 2, 3, 4, 5, 6};      // list of calm programs to choose from (as defined by the switch case in runIteration)
+    std::vector<int> energeticPrograms = {1, 3, 4, 5, 6, 7}; // list of energetic programs to choose from
     void newCalmProgram();
     void newEnergeticProgram();
     void newNextProgramDelay();
