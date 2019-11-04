@@ -36,10 +36,12 @@ Navigation currentNavigation = NONE;
 
 AutoMenu autoMenu;
 SoundMenu soundMenu;
+DmxMenu dmxMenu;
 
 // mode variables
 AutoMode autoMode;
 SoundMode soundMode;
+DmxMode dmxMode;
 std::vector<Mode *> modes;
 
 int currentMode = 0;
@@ -109,13 +111,17 @@ void setup()
   // setup menu's
   autoMenu = AutoMenu();
   soundMenu = SoundMenu();
+  dmxMenu = DmxMenu();
 
   // setup LiquidMenu and Modes
   liquidMenu.init();
   autoMode = AutoMode(&autoMenu, &ledTubes);
   soundMode = SoundMode(&soundMenu, &ledTubes, MIC_PIN);
+  dmxMode = DmxMode(&dmxMenu, &ledTubes);
+
   modes.push_back(&autoMode);
   modes.push_back(&soundMode);
+  modes.push_back(&dmxMode);
   amountOfModes = modes.size();
   liquidMenu.update();
 }

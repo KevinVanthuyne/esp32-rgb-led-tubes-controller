@@ -9,23 +9,24 @@
 #include "../Utils.h"
 #include "../Globals.h"
 
+enum Direction
+{
+    RIGHT_PRESS = 1,
+    LEFT_PRESS = 2,
+};
+
 class Menu
 {
 public:
     Menu() {}
     virtual ~Menu() {}
-    virtual void up() = 0;
-    virtual void right() = 0;
-    virtual void down() = 0;
-    virtual void left() = 0;
+
+    void up();
+    void right();
+    void down();
+    void left();
 
 protected:
     static void nextMode();
     static void previousMode();
-};
-
-enum Direction
-{
-    RIGHT_PRESS = 1,
-    LEFT_PRESS = 2,
 };
