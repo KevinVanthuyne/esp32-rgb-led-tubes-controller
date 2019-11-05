@@ -47,23 +47,3 @@ AutoMenu::AutoMenu()
     speedLine.attach_function(LEFT_PRESS, decreaseSpeed);
     liquidMenu.add_screen(autoModeScreen);
 }
-
-void AutoMenu::up()
-{
-    liquidMenu.switch_focus(false);
-}
-
-void AutoMenu::right()
-{
-    liquidMenu.call_function(RIGHT_PRESS);
-}
-
-void AutoMenu::down()
-{
-    liquidMenu.switch_focus();
-}
-
-void AutoMenu::left()
-{
-    liquidMenu.call_function(LEFT_PRESS);
-}

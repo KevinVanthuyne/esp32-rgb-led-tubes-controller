@@ -5,8 +5,8 @@
 #include "Globals.h"
 #include "Menu.h"
 
-class SoundMenu : public Menu
+class DmxMenu : public Menu
 {
 public:
-    SoundMenu();
+    DmxMenu();
 };

@@ -9,8 +9,4 @@ class AutoMenu : public Menu
 {
 public:
     AutoMenu();
-    void up();
-    void right();
-    void down();
-    void left();
 };

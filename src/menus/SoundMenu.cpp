@@ -26,23 +26,3 @@ SoundMenu::SoundMenu()
     sensitivityLine.attach_function(LEFT_PRESS, decreaseSensitivity);
     liquidMenu.add_screen(soundModeScreen);
 }
-
-void SoundMenu::up()
-{
-    liquidMenu.switch_focus(false);
-}
-
-void SoundMenu::right()
-{
-    liquidMenu.call_function(RIGHT_PRESS);
-}
-
-void SoundMenu::down()
-{
-    liquidMenu.switch_focus();
-}
-
-void SoundMenu::left()
-{
-    liquidMenu.call_function(LEFT_PRESS);
-}

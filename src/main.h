@@ -5,6 +5,9 @@
 #include <Arduino.h>
 #include <LiquidCrystal_I2C.h>
 #include <LiquidMenu.h>
+#include <WiFi.h>
+#include <WiFiUdp.h>
+#include <ArtnetWifi.h>
 
 #include "Globals.h"
 #include "modes/Modes.h"
