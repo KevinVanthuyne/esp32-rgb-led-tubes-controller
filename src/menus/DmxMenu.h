@@ -9,8 +9,4 @@ class DmxMenu : public Menu
 {
 public:
     DmxMenu();
-    void up();
-    void right();
-    void down();
-    void left();
 };

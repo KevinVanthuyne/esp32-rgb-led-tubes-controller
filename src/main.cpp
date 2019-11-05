@@ -29,6 +29,11 @@ LedTube ledTube3(&ledStrip3);
 LedTube ledTube4(&ledStrip4);
 std::vector<LedTube *> ledTubes;
 
+CRGB leds1[PIXELS_PER_TUBE];
+CRGB leds2[PIXELS_PER_TUBE];
+CRGB leds3[PIXELS_PER_TUBE];
+CRGB leds4[PIXELS_PER_TUBE];
+
 // menu variables
 LiquidCrystal_I2C lcd(0x27, 20, 4); // (I2C address, amount of characters, amount of lines)
 LiquidMenu liquidMenu(lcd);
@@ -49,6 +54,11 @@ int amountOfModes;
 int currentProgram = 1;
 uint8_t programSpeed = 128; // ranges from 0 to 255
 float soundSensitivity = 0.1;
+
+// dmx mode
+ArtnetWifi artnet;
+char notConnected[20] = "Not connected";
+char *ipAddress = notConnected;
 
 // programs
 ColorCycleProgram colorCycleProgram;
@@ -107,6 +117,12 @@ void setup()
   ledTubes.push_back(&ledTube2);
   ledTubes.push_back(&ledTube3);
   ledTubes.push_back(&ledTube4);
+
+  FastLED.addLeds<WS2812, TUBE_1_PIN, RGB>(leds1, PIXELS_PER_TUBE);
+  FastLED.addLeds<WS2812, TUBE_2_PIN, RGB>(leds2, PIXELS_PER_TUBE);
+  FastLED.addLeds<WS2812, TUBE_3_PIN, RGB>(leds3, PIXELS_PER_TUBE);
+  FastLED.addLeds<WS2812, TUBE_4_PIN, RGB>(leds4, PIXELS_PER_TUBE);
+  FastLED.setBrightness(128);
 
   // setup menu's
   autoMenu = AutoMenu();

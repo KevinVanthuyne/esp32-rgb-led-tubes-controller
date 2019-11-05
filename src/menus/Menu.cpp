@@ -15,7 +15,7 @@ void Menu::previousMode()
     liquidMenu.previous_screen();
     if (currentMode > 0)
         currentMode--;
-    if (currentMode == 0)
+    else if (currentMode == 0)
         currentMode = amountOfModes - 1;
 }
 

@@ -1,7 +1,8 @@
 #include "DmxMenu.h"
 
 LiquidLine dmxModeLine(1, 0, "DMX MODE");
-LiquidScreen dmxModeScreen(dmxModeLine);
+LiquidLine ipLine(2, 1, "IP: ", ipAddress);
+LiquidScreen dmxModeScreen(dmxModeLine, ipLine);
 
 DmxMenu::DmxMenu()
 {
