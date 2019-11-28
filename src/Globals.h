@@ -2,9 +2,6 @@
 
 #include <LiquidCrystal_I2C.h>
 #include <LiquidMenu.h>
-#include <WiFi.h>
-#include <WiFiUdp.h>
-#include <ArtnetWifi.h>
 #include <FastLED.h>
 
 #include "programs/Programs.h"
@@ -20,11 +17,10 @@ extern int currentProgram;
 extern uint8_t programSpeed;
 extern float soundSensitivity;
 
-// dmx mode
-extern ArtnetWifi artnet;
-extern char *ipAddress;
-
+extern byte pixelsPerTube;
 extern CRGB leds1[];
 extern CRGB leds2[];
 extern CRGB leds3[];
 extern CRGB leds4[];
+extern CRGB leds5[];
+extern CRGB leds6[];

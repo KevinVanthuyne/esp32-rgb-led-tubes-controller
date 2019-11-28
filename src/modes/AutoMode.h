@@ -10,7 +10,7 @@ class AutoMode : public Mode
 {
 public:
     AutoMode() {}
-    AutoMode(Menu *menu, std::vector<LedTube *> *ledTubes) : Mode(menu, ledTubes), iterationDelay(200), previousIterationMillis(0)
+    AutoMode(Menu *menu) : Mode(menu), iterationDelay(200), previousIterationMillis(0)
     {
     }
     void runIteration();

@@ -7,9 +7,7 @@ void noop()
 
 int getRandomNumber(int min, int max)
 {
-    std::mt19937 rng(std::chrono::steady_clock::now().time_since_epoch().count());
-    std::uniform_int_distribution<int> uniform_dist(min, max);
-    return uniform_dist(rng);
+    return random(min, max + 1);
 }
 
 // get a random number that is not equal to the previous one

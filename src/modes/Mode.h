@@ -1,8 +1,5 @@
 #pragma once
 
-#include <vector>
-
-#include "LedTube.h"
 #include "menus/Menu.h"
 #include "programs/Programs.h"
 
@@ -29,15 +26,14 @@ public:
     Menu *menu;
 
 protected:
-    Mode(Menu *menu, std::vector<LedTube *> *ledTubes) : menu(menu), ledTubes(ledTubes)
+    Mode(Menu *menu) : menu(menu)
     {
-        colorCycleProgram = ColorCycleProgram(ledTubes);
-        colorCycleSmoothProgram = ColorCycleSmoothProgram(ledTubes);
-        colorSweepProgram = ColorSweepProgram(ledTubes);
-        colorSweepInToOutProgram = ColorSweepInToOutProgram(ledTubes);
-        colorSweepOutToInProgram = ColorSweepOutToInProgram(ledTubes);
-        colorSweepInToOutToInProgram = ColorSweepInToOutToInProgram(ledTubes);
-        sparkleProgram = SparkleProgram(ledTubes);
+        colorCycleProgram = ColorCycleProgram();
+        colorCycleSmoothProgram = ColorCycleSmoothProgram();
+        colorSweepProgram = ColorSweepProgram();
+        colorSweepInToOutProgram = ColorSweepInToOutProgram();
+        colorSweepOutToInProgram = ColorSweepOutToInProgram();
+        colorSweepInToOutToInProgram = ColorSweepInToOutToInProgram();
+        sparkleProgram = SparkleProgram();
     }
-    std::vector<LedTube *> *ledTubes;
 };

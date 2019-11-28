@@ -1,7 +1,6 @@
 #pragma once
 
-#include <random>
-#include <chrono>
+#include <Arduino.h>
 
 void noop();
 int getRandomNumber(int min, int max);

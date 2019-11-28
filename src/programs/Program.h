@@ -1,36 +1,30 @@
 #pragma once
 
-#include <vector>
-
-#include "Adafruit_NeoPixel.h"
-
-#include "../LedTube.h"
 #include "../Utils.h"
+
+extern CRGB *ledStrips[6]; // globally defined ledtubes
+extern byte pixelsPerTube;
 
 class Program
 {
 public:
-    Program() {}
+    Program() : currentIteration(0) {}
     virtual ~Program() {}
     // runs a single iteration of the program/animation and returns the required wait time
     virtual int runIteration(uint8_t speed) = 0;
 
 protected:
-    Program(std::vector<LedTube *> *ledTubes) : ledTubes(ledTubes), currentIteration(0) {}
-    std::vector<LedTube *> *ledTubes;
-    uint currentIteration;
+    unsigned int currentIteration;
 
     // colors
-    uint32_t red = rgbColor(255, 0, 0);
-    uint32_t orange = rgbColor(255, 128, 0);
-    uint32_t yellow = rgbColor(255, 255, 0);
-    uint32_t green = rgbColor(0, 255, 0);
-    uint32_t cyan = rgbColor(0, 255, 128);
-    uint32_t lightBlue = rgbColor(0, 128, 255);
-    uint32_t blue = rgbColor(0, 0, 255);
-    uint32_t purple = rgbColor(128, 0, 255);
-    uint32_t pink = rgbColor(255, 0, 255);
-    uint32_t colors[9] = {red, orange, yellow, green, cyan, lightBlue, blue, purple, pink};
-    uint32_t white = rgbColor(255, 255, 255);
-    uint32_t black = rgbColor(0, 0, 0);
+    CRGB colors[9] = {
+        CRGB::Red,
+        CRGB::Orange,
+        CRGB::Yellow,
+        CRGB::Green,
+        CRGB::Cyan,
+        CRGB::LightBlue,
+        CRGB::Blue,
+        CRGB::Purple,
+        CRGB::Pink};
 };
